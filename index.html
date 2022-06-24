@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Enigma Machine</title>
+</head>
+<body>
+    <div id="messageboard">
+        <textarea name="" id="message" cols="62" rows="4" maxlength="200" onkeydown="return /[a-z]/i.test(event.key)" style="text-transform:uppercase; resize: none;"></textarea>
+    </div>
+    <div id="lightboard">
+        <div id="row">
+            <div id="qkey" class="key">Q</div>
+            <div id="wkey" class="key">W</div>
+            <div id="ekey" class="key">E</div>
+            <div id="rkey" class="key">R</div>
+            <div id="tkey" class="key">T</div>
+            <div id="zkey" class="key">Z</div>
+            <div id="ukey" class="key">U</div>
+            <div id="ikey" class="key">I</div>
+            <div id="okey" class="key">O</div>
+        </div>
+        <div id="row">
+            <div id="akey" class="key">A</div>
+            <div id="skey" class="key">S</div>
+            <div id="dkey" class="key">D</div>
+            <div id="fkey" class="key">F</div>
+            <div id="gkey" class="key">G</div>
+            <div id="hkey" class="key">H</div>
+            <div id="jkey" class="key">J</div>
+            <div id="kkey" class="key">K</div>
+        </div>
+        <div id="row">
+            <div id="pkey" class="key">P</div>
+            <div id="ykey" class="key">Y</div>
+            <div id="xkey" class="key">X</div>
+            <div id="ckey" class="key">C</div>
+            <div id="vkey" class="key">V</div>
+            <div id="bkey" class="key">B</div>
+            <div id="mkey" class="key">M</div>
+            <div id="nkey" class="key">N</div>
+            <div id="lkey" class="key">L</div>
+        </div>
+    </div>
+</body>
+</html>
