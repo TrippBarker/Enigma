@@ -8,41 +8,48 @@
 </head>
 <body>
     <div id="messageboard">
-        <textarea name="" id="message" cols="62" rows="4" maxlength="200" onkeydown="return /[a-z]/i.test(event.key)" style="text-transform:uppercase; resize: none;"></textarea>
+        <textarea id="OriginalMessage" class="message" cols="62" rows="4" maxlength="200" style="text-transform:uppercase; resize:none;" readonly></textarea>
+        <textarea id="CryptedMessage" class="message" cols="62" rows="4" maxlength="200" style="text-transform:uppercase; resize:none;" readonly>YOUR MESSAGE WILL APPEAR HERE</textarea>
     </div>
-    <div id="lightboard">
+    <div id="keyboard">
         <div id="row">
-            <div id="qkey" class="key">Q</div>
-            <div id="wkey" class="key">W</div>
-            <div id="ekey" class="key">E</div>
-            <div id="rkey" class="key">R</div>
-            <div id="tkey" class="key">T</div>
-            <div id="zkey" class="key">Z</div>
-            <div id="ukey" class="key">U</div>
-            <div id="ikey" class="key">I</div>
-            <div id="okey" class="key">O</div>
+            <button id="qkey" class="key">Q</button>
+            <button id="wkey" class="key">W</button>
+            <button id="ekey" class="key">E</button>
+            <button id="rkey" class="key">R</button>
+            <button id="tkey" class="key">T</button>
+            <button id="zkey" class="key">Z</button>
+            <button id="ukey" class="key">U</button>
+            <button id="ikey" class="key">I</button>
+            <button id="okey" class="key">O</button>
         </div>
         <div id="row">
-            <div id="akey" class="key">A</div>
-            <div id="skey" class="key">S</div>
-            <div id="dkey" class="key">D</div>
-            <div id="fkey" class="key">F</div>
-            <div id="gkey" class="key">G</div>
-            <div id="hkey" class="key">H</div>
-            <div id="jkey" class="key">J</div>
-            <div id="kkey" class="key">K</div>
+            <button id="akey" class="key">A</button>
+            <button id="skey" class="key">S</button>
+            <button id="dkey" class="key">D</button>
+            <button id="fkey" class="key">F</button>
+            <button id="gkey" class="key">G</button>
+            <button id="hkey" class="key">H</button>
+            <button id="jkey" class="key">J</button>
+            <button id="kkey" class="key">K</button>
         </div>
         <div id="row">
-            <div id="pkey" class="key">P</div>
-            <div id="ykey" class="key">Y</div>
-            <div id="xkey" class="key">X</div>
-            <div id="ckey" class="key">C</div>
-            <div id="vkey" class="key">V</div>
-            <div id="bkey" class="key">B</div>
-            <div id="mkey" class="key">M</div>
-            <div id="nkey" class="key">N</div>
-            <div id="lkey" class="key">L</div>
+            <button id="pkey" class="key">P</button>
+            <button id="ykey" class="key">Y</button>
+            <button id="xkey" class="key">X</button>
+            <button id="ckey" class="key">C</button>
+            <button id="vkey" class="key">V</button>
+            <button id="bkey" class="key">B</button>
+            <button id="mkey" class="key">M</button>
+            <button id="nkey" class="key">N</button>
+            <button id="lkey" class="key">L</button>
+        </div>
+        <div id="row">
+            <button id="cryptkey" class="bigkey">CRYPT</button>
+            <button id="copykey" class="bigkey">COPY</button>
+            <button id="clrkey" class="bigkey">CLEAR</button>
         </div>
     </div>
+    <script src="./enigma.js"></script>
 </body>
 </html>
