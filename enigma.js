@@ -4,6 +4,15 @@ const copyKey = document.querySelector('#copykey');
 const clrKey = document.querySelector('#clrkey');
 const orgMssg = document.querySelector('#OriginalMessage');
 const cryptMssg = document.querySelector('#CryptedMessage');
+const optionMenu = document.querySelector('#options');
+
+orgMssg.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+    const {clientX: mouseX, clientY: mouseY} = event;
+    optionMenu.style.top = `${mouseY}px`;
+    optionMenu.style.left = `${mouseX}px`;
+    optionMenu.classList.add("visible");
+})
 
 function cryptMessage(e){
     cryptMssg.textContent = orgMssg.value.toUpperCase();
@@ -119,8 +128,15 @@ function typedLetter(e){
     }
 }
 
+function combo(e){
+    if (repeat) return
+    if (ctrlKey && key === 'V'){
+        orgMssg.textContent = "paste";
+    }
+}
+
 crptKey.addEventListener('click', simpleCaesarCipher);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
 keys.forEach(button => button.addEventListener('click', typeLetter));
-window.addEventListener('keydown', typedLetter);
+window.addEventListener('keyup', typedLetter);

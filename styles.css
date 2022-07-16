@@ -73,3 +73,18 @@
 #clrkey {
     background-color: darkred;
 }
+
+#options {
+    position: fixed;
+    z-index: 10000;
+    background-color: #f7f3ea;
+    display: none;
+}
+
+#options.visible {
+    display: block;
+}
+
+.optionBtn{
+    background-color: green;
+}
