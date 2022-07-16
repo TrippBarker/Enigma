@@ -1,6 +1,7 @@
 * {
     background-color: black;
     font-family: 'Overpass Mono', monospace;
+    outline: none;
 }
 
 #messageboard {
