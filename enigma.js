@@ -1,18 +1,20 @@
+const app = document.querySelector('#application');
+const infoBtn = document.querySelector('#info');
+const infoBox = document.querySelector('#infoBox');
 const keys = document.querySelectorAll('.key');
 const crptKey = document.querySelector('#cryptkey');
 const copyKey = document.querySelector('#copykey');
 const clrKey = document.querySelector('#clrkey');
+const pstKey = document.querySelector('#pstkey');
 const orgMssg = document.querySelector('#OriginalMessage');
 const cryptMssg = document.querySelector('#CryptedMessage');
-const optionMenu = document.querySelector('#options');
 
-orgMssg.addEventListener("contextmenu", (event) => {
-    event.preventDefault();
-    const {clientX: mouseX, clientY: mouseY} = event;
-    optionMenu.style.top = `${mouseY}px`;
-    optionMenu.style.left = `${mouseX}px`;
-    optionMenu.classList.add("visible");
-})
+
+
+function displayInfo(e){
+    infoBox.classList.toggle("visible");
+    app.classList.toggle("dimmed");
+}
 
 function cryptMessage(e){
     cryptMssg.textContent = orgMssg.value.toUpperCase();
@@ -105,6 +107,7 @@ function simpleCaesarCipher(e){
         }
     }
     cryptMssg.textContent = message;
+    orgMssg.textContent = "";
 }
 
 function copyMessage(e){
@@ -116,6 +119,9 @@ function clearMessage(e){
     orgMssg.textContent = "";
 }
 
+function pasteMessage(e){
+}
+
 function typeLetter(e){
     orgMssg.textContent = (orgMssg.value + this.textContent);
 }
@@ -125,6 +131,8 @@ function typedLetter(e){
         orgMssg.textContent = (orgMssg.value + e.key);
     } else if (e.which === 8){
         orgMssg.textContent = (orgMssg.value.slice(0, -1));
+    } else if (e.which === 13){
+        simpleCaesarCipher();
     }
 }
 
@@ -135,8 +143,11 @@ function combo(e){
     }
 }
 
+infoBtn.addEventListener('click', displayInfo);
+infoBox.addEventListener('click', displayInfo);
 crptKey.addEventListener('click', simpleCaesarCipher);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
+pstKey.addEventListener('click', pasteMessage);
 keys.forEach(button => button.addEventListener('click', typeLetter));
 window.addEventListener('keyup', typedLetter);

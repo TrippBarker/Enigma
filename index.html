@@ -3,54 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" href="./media/eye.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Enigma Machine</title>
 </head>
 <body>
-    <div id="messageboard">
-        <textarea id="OriginalMessage" class="message" cols="62" rows="4" maxlength="200" style="text-transform:uppercase; resize:none;" readonly></textarea>
-        <textarea id="CryptedMessage" class="message" cols="62" rows="4" maxlength="200" style="text-transform:uppercase; resize:none;" readonly>YOUR MESSAGE WILL APPEAR HERE</textarea>
+    <div id="header">
+        <button id="info">i</button>
     </div>
-    <div id="keyboard">
-        <div id="row">
-            <button id="qkey" class="key">Q</button>
-            <button id="wkey" class="key">W</button>
-            <button id="ekey" class="key">E</button>
-            <button id="rkey" class="key">R</button>
-            <button id="tkey" class="key">T</button>
-            <button id="zkey" class="key">Z</button>
-            <button id="ukey" class="key">U</button>
-            <button id="ikey" class="key">I</button>
-            <button id="okey" class="key">O</button>
+    <div id="infoBox">
+        <div id="infoWords">
+            <p>Thank you for checking out my project! To use this application you can type a message with the physical or on-screen keyboard. Once you have your message ready either hit enter or 'CRYPT' and your
+            scrambled message will appear on the right. To decrypt the message just type it back into the field on the left!</p>
+            <p>Features being worked on:</p>
+            <ul>
+                <li><s>on-screen keyboard</s> DONE</li>
+                <li><s>encryption/copy/clear buttons</s> DONE</li>
+                <li><s>Ceasar Cipher Encryption</s> DONE</li>
+                <li>Enigma Style Encryption Rotors</li>
+                <li>Enigma Style Plug Board</li>
+                <li>Option to use spaces</li>
+                <li>Paste Feature</li>
+            </ul>
         </div>
-        <div id="row">
-            <button id="akey" class="key">A</button>
-            <button id="skey" class="key">S</button>
-            <button id="dkey" class="key">D</button>
-            <button id="fkey" class="key">F</button>
-            <button id="gkey" class="key">G</button>
-            <button id="hkey" class="key">H</button>
-            <button id="jkey" class="key">J</button>
-            <button id="kkey" class="key">K</button>
+    </div>
+    <div id="application">
+        <div id="messageboard">
+            <textarea id="OriginalMessage" class="message" cols="62" rows="4" maxlength="200" style="text-transform:uppercase; resize:none;" readonly></textarea>
+            <textarea id="CryptedMessage" class="message" cols="62" rows="4" maxlength="200" style="text-transform:uppercase; resize:none;" readonly>YOUR MESSAGE WILL APPEAR HERE</textarea>
         </div>
-        <div id="row">
-            <button id="pkey" class="key">P</button>
-            <button id="ykey" class="key">Y</button>
-            <button id="xkey" class="key">X</button>
-            <button id="ckey" class="key">C</button>
-            <button id="vkey" class="key">V</button>
-            <button id="bkey" class="key">B</button>
-            <button id="mkey" class="key">M</button>
-            <button id="nkey" class="key">N</button>
-            <button id="lkey" class="key">L</button>
-        </div>
-        <div id="row">
-            <button id="cryptkey" class="bigkey">CRYPT</button>
-            <button id="copykey" class="bigkey">COPY</button>
-            <button id="clrkey" class="bigkey">CLEAR</button>
-        </div>
-        <div id="options">
-            <button id="paste" class="optionBtn">PASTE</button>
+        <div id="keyboard">
+            <div id="row">
+                <button id="qkey" class="key">Q</button>
+                <button id="wkey" class="key">W</button>
+                <button id="ekey" class="key">E</button>
+                <button id="rkey" class="key">R</button>
+                <button id="tkey" class="key">T</button>
+                <button id="zkey" class="key">Z</button>
+                <button id="ukey" class="key">U</button>
+                <button id="ikey" class="key">I</button>
+                <button id="okey" class="key">O</button>
+            </div>
+            <div id="row">
+                <button id="akey" class="key">A</button>
+                <button id="skey" class="key">S</button>
+                <button id="dkey" class="key">D</button>
+                <button id="fkey" class="key">F</button>
+                <button id="gkey" class="key">G</button>
+                <button id="hkey" class="key">H</button>
+                <button id="jkey" class="key">J</button>
+                <button id="kkey" class="key">K</button>
+            </div>
+            <div id="row">
+                <button id="pkey" class="key">P</button>
+                <button id="ykey" class="key">Y</button>
+                <button id="xkey" class="key">X</button>
+                <button id="ckey" class="key">C</button>
+                <button id="vkey" class="key">V</button>
+                <button id="bkey" class="key">B</button>
+                <button id="mkey" class="key">M</button>
+                <button id="nkey" class="key">N</button>
+                <button id="lkey" class="key">L</button>
+            </div>
+            <div id="row">
+                <button id="cryptkey" class="bigkey">CRYPT</button>
+                <button id="copykey" class="bigkey">COPY</button>
+                <button id="clrkey" class="bigkey">CLEAR</button>
+            </div>
+            <div id="row">
+                <button id="pstkey" class="bigkey">PASTE</button>
+            </div>
         </div>
     </div>
     <script src="./enigma.js"></script>
