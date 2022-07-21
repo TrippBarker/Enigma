@@ -133,10 +133,6 @@ button:active {
     background-color: darkred;
 }
 
-#pstkey {
-    background-color: darkblue;
-}
-
 .visible {
     display: flex !important;
     opacity: 100% !important;

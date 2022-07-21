@@ -5,11 +5,15 @@ const keys = document.querySelectorAll('.key');
 const crptKey = document.querySelector('#cryptkey');
 const copyKey = document.querySelector('#copykey');
 const clrKey = document.querySelector('#clrkey');
-const pstKey = document.querySelector('#pstkey');
 const orgMssg = document.querySelector('#OriginalMessage');
 const cryptMssg = document.querySelector('#CryptedMessage');
 
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const rotorI =   "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
+const rotorII =  "AJDKSIRUXBLHWTMCQGZNPYFVOE";
+const rotorIII = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
 
+var UKWA = "EJMZALYXVBWFCRQUONTSPIKHGD";
 
 function displayInfo(e){
     infoBox.classList.toggle("visible");
@@ -18,6 +22,31 @@ function displayInfo(e){
 
 function cryptMessage(e){
     cryptMssg.textContent = orgMssg.value.toUpperCase();
+    orgMssg.textContent = "";
+}
+
+function testEnigmaCipher(){
+    var message = "";
+    var firstRotor = rotorI;
+    var secRotor = rotorII;
+    var thirdRotor = rotorIII;
+    var reflector = UKWA;
+    var letter = "";
+    for (var i = 0; i < orgMssg.value.length; i++){
+        letter = orgMssg.value.charAt(i).toUpperCase();
+        letter = firstRotor.charAt(alphabet.indexOf(letter));
+        letter = secRotor.charAt(alphabet.indexOf(letter));
+        letter = thirdRotor.charAt(alphabet.indexOf(letter));
+        letter = reflector.charAt(alphabet.indexOf(letter));
+        letter = alphabet.charAt(thirdRotor.indexOf(letter));
+        letter = alphabet.charAt(secRotor.indexOf(letter));
+        letter = alphabet.charAt(firstRotor.indexOf(letter));
+        message += letter;
+        firstRotor += firstRotor.charAt(0);
+        firstRotor = firstRotor.substring(1);
+    }
+    cryptMssg.textContent = message;
+    orgMssg.textContent = "";
 }
 
 function simpleCaesarCipher(e){
@@ -119,9 +148,6 @@ function clearMessage(e){
     orgMssg.textContent = "";
 }
 
-function pasteMessage(e){
-}
-
 function typeLetter(e){
     orgMssg.textContent = (orgMssg.value + this.textContent);
 }
@@ -145,9 +171,8 @@ function combo(e){
 
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
-crptKey.addEventListener('click', simpleCaesarCipher);
+crptKey.addEventListener('click', testEnigmaCipher);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
-pstKey.addEventListener('click', pasteMessage);
 keys.forEach(button => button.addEventListener('click', typeLetter));
 window.addEventListener('keyup', typedLetter);
