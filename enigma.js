@@ -60,6 +60,7 @@ function testEnigmaCipher(){
     }
     cryptMssg.textContent = message;
     orgMssg.textContent = "";
+    orgMssg.value = "";
 }
 
 function simpleCaesarCipher(e){
@@ -150,6 +151,7 @@ function simpleCaesarCipher(e){
     }
     cryptMssg.textContent = message;
     orgMssg.textContent = "";
+    orgMssg.value = "";
 }
 
 function copyMessage(e){
@@ -159,6 +161,7 @@ function copyMessage(e){
 function clearMessage(e){
     cryptMssg.textContent = "";
     orgMssg.textContent = "";
+    orgMssg.value = "";
 }
 
 function typeLetter(e){
