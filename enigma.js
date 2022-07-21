@@ -33,7 +33,8 @@ function testEnigmaCipher(){
     var reflector = UKWA;
     var letter = "";
     for (var i = 0; i < orgMssg.value.length; i++){
-        letter = orgMssg.value.charAt(i).toUpperCase();
+        if (alphabet.includes(orgMssg.value.charAt(i).toUpperCase())){
+            letter = orgMssg.value.charAt(i).toUpperCase();
         letter = firstRotor.charAt(alphabet.indexOf(letter));
         letter = secRotor.charAt(alphabet.indexOf(letter));
         letter = thirdRotor.charAt(alphabet.indexOf(letter));
@@ -44,6 +45,7 @@ function testEnigmaCipher(){
         message += letter;
         firstRotor += firstRotor.charAt(0);
         firstRotor = firstRotor.substring(1);
+        }
     }
     cryptMssg.textContent = message;
     orgMssg.textContent = "";
@@ -158,7 +160,7 @@ function typedLetter(e){
     } else if (e.which === 8){
         orgMssg.textContent = (orgMssg.value.slice(0, -1));
     } else if (e.which === 13){
-        simpleCaesarCipher();
+        testEnigmaCipher();
     }
 }
 
