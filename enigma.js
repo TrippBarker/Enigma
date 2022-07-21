@@ -14,6 +14,7 @@ const rotorII =  "AJDKSIRUXBLHWTMCQGZNPYFVOE";
 const rotorIII = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
 
 var UKWA = "EJMZALYXVBWFCRQUONTSPIKHGD";
+const UKWB = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 
 function displayInfo(e){
     infoBox.classList.toggle("visible");
@@ -30,29 +31,31 @@ function testEnigmaCipher(){
     var firstRotor = rotorI;
     var secRotor = rotorII;
     var thirdRotor = rotorIII;
-    var reflector = UKWA;
+    var reflector = UKWB;
     var letter = "";
     for (var i = 0; i < orgMssg.value.length; i++){
         if (alphabet.includes(orgMssg.value.charAt(i).toUpperCase())){
             letter = orgMssg.value.charAt(i).toUpperCase();
-        letter = firstRotor.charAt(alphabet.indexOf(letter));
-        letter = secRotor.charAt(alphabet.indexOf(letter));
-        letter = thirdRotor.charAt(alphabet.indexOf(letter));
-        letter = reflector.charAt(alphabet.indexOf(letter));
-        letter = alphabet.charAt(thirdRotor.indexOf(letter));
-        letter = alphabet.charAt(secRotor.indexOf(letter));
-        letter = alphabet.charAt(firstRotor.indexOf(letter));
-        message += letter;
-        if (firstRotor.charAt(0) === "X"){
-            if (secRotor.charAt(0) === "U"){
-                thirdRotor += thirdRotor.charAt(0);
-                thirdRotor = thirdRotor.substring(1);
+            letter = firstRotor.charAt(alphabet.indexOf(letter));
+            letter = secRotor.charAt(alphabet.indexOf(letter));
+            letter = thirdRotor.charAt(alphabet.indexOf(letter));
+            letter = reflector.charAt(alphabet.indexOf(letter));
+            letter = alphabet.charAt(thirdRotor.indexOf(letter));
+            letter = alphabet.charAt(secRotor.indexOf(letter));
+            letter = alphabet.charAt(firstRotor.indexOf(letter));
+            message += letter;
+            if (firstRotor.charAt(0) === "X"){
+                if (secRotor.charAt(0) === "U"){
+                    thirdRotor += thirdRotor.charAt(0);
+                    thirdRotor = thirdRotor.substring(1);
+                }
+                secRotor += secRotor.charAt(0);
+                secRotor = secRotor.substring(1);
             }
-            secRotor += secRotor.charAt(0);
-            secRotor = secRotor.substring(1);
-        }
-        firstRotor += firstRotor.charAt(0);
-        firstRotor = firstRotor.substring(1);
+            firstRotor += firstRotor.charAt(0);
+            firstRotor = firstRotor.substring(1);
+        } else {
+            message += orgMssg.value.charAt(i);
         }
     }
     cryptMssg.textContent = message;
