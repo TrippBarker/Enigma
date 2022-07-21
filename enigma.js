@@ -43,6 +43,14 @@ function testEnigmaCipher(){
         letter = alphabet.charAt(secRotor.indexOf(letter));
         letter = alphabet.charAt(firstRotor.indexOf(letter));
         message += letter;
+        if (firstRotor.charAt(0) === "X"){
+            if (secRotor.charAt(0) === "U"){
+                thirdRotor += thirdRotor.charAt(0);
+                thirdRotor = thirdRotor.substring(1);
+            }
+            secRotor += secRotor.charAt(0);
+            secRotor = secRotor.substring(1);
+        }
         firstRotor += firstRotor.charAt(0);
         firstRotor = firstRotor.substring(1);
         }
