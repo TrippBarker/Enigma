@@ -133,6 +133,18 @@ button:active {
     background-color: darkred;
 }
 
+.selector {
+    color: #f7f3ea;
+    margin: 10px;
+}
+
+#rotorSelector {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #f7f3ea;
+}
+
 .visible {
     display: flex !important;
     opacity: 100% !important;

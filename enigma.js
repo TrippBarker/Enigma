@@ -6,14 +6,21 @@ const copyKey = document.querySelector('#copykey');
 const clrKey = document.querySelector('#clrkey');
 const orgMssg = document.querySelector('#OriginalMessage');
 const cryptMssg = document.querySelector('#CryptedMessage');
+const selectorOne = document.querySelector('#rotorOneSelect');
+const selectorTwo = document.querySelector('#rotorTwoSelect');
+const selectorThree = document.querySelector('#rotorThreeSelect');
+const reflectorSelctor = document.querySelector('#reflectorSelect');
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const rotorI =   "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
 const rotorII =  "AJDKSIRUXBLHWTMCQGZNPYFVOE";
 const rotorIII = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
+const rotorIV = "ESOVPZJAYQUIRHXLNFTGKDCMWB";
+const rotorV = "VZBRGITYUPSDNHLXAWMJQOFECK";
 
-var UKWA = "EJMZALYXVBWFCRQUONTSPIKHGD";
+const UKWA = "EJMZALYXVBWFCRQUONTSPIKHGD";
 const UKWB = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+const UKWC = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
 
 function displayInfo(e){
     infoBox.classList.toggle("visible");
@@ -25,12 +32,46 @@ function cryptMessage(e){
     orgMssg.textContent = "";
 }
 
+function getRotor(selectorValue){
+    var returnVal = "";
+    switch (selectorValue){
+        case "I":
+            returnVal = rotorI;
+            break;
+        case "II":
+            returnVal = rotorII;
+            break;
+        case "III":
+            returnVal = rotorIII;
+            break;
+        case "IV":
+            returnVal = rotorIV;
+            break;
+        case "V":
+            returnVal = rotorV;
+            break;
+        case "A":
+            returnVal = UKWA;
+            break;
+        case "B":
+            returnVal = UKWB;
+            break;
+        case "C":
+            returnVal = UKWC;
+            break;
+        default:
+            returnVal = alphabet;
+            break;
+    }
+    return returnVal;
+}
+
 function testEnigmaCipher(){
     var message = "";
-    var firstRotor = rotorI;
-    var secRotor = rotorII;
-    var thirdRotor = rotorIII;
-    var reflector = UKWB;
+    var firstRotor = getRotor(selectorOne.value);
+    var secRotor = getRotor(selectorTwo.value);
+    var thirdRotor = getRotor(selectorThree.value);
+    var reflector = getRotor(reflectorSelctor.value);
     var letter = "";
     for (var i = 0; i < orgMssg.value.length; i++){
         if (alphabet.includes(orgMssg.value.charAt(i).toUpperCase())){
@@ -148,7 +189,6 @@ function simpleCaesarCipher(e){
     }
     cryptMssg.textContent = message;
     orgMssg.textContent = "";
-    orgMssg.value = "";
 }
 
 function copyMessage(e){
@@ -157,7 +197,7 @@ function copyMessage(e){
 
 function clearMessage(e){
     cryptMssg.textContent = "";
-    orgMssg.value = "";
+    orgMssg.textContent = "";
 }
 
 function typeLetter(e){
