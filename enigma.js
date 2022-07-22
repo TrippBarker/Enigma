@@ -2,7 +2,6 @@ const app = document.querySelector('#application');
 const infoBtn = document.querySelector('#info');
 const infoBox = document.querySelector('#infoBox');
 const keys = document.querySelectorAll('.key');
-const crptKey = document.querySelector('#cryptkey');
 const copyKey = document.querySelector('#copykey');
 const clrKey = document.querySelector('#clrkey');
 const orgMssg = document.querySelector('#OriginalMessage');
@@ -59,8 +58,6 @@ function testEnigmaCipher(){
         }
     }
     cryptMssg.textContent = message;
-    orgMssg.textContent = "";
-    orgMssg.value = "";
 }
 
 function simpleCaesarCipher(e){
@@ -160,34 +157,25 @@ function copyMessage(e){
 
 function clearMessage(e){
     cryptMssg.textContent = "";
-    orgMssg.textContent = "";
     orgMssg.value = "";
 }
 
 function typeLetter(e){
     orgMssg.textContent = (orgMssg.value + this.textContent);
+    testEnigmaCipher();
 }
 
 function typedLetter(e){
-    if (e.which >= 65 && e.which <= 90){
+    if (e.which >= 65 && e.which <= 90 || e.which === 32){
         orgMssg.textContent = (orgMssg.value + e.key);
     } else if (e.which === 8){
         orgMssg.textContent = (orgMssg.value.slice(0, -1));
-    } else if (e.which === 13){
-        testEnigmaCipher();
     }
-}
-
-function combo(e){
-    if (repeat) return
-    if (ctrlKey && key === 'V'){
-        orgMssg.textContent = "paste";
-    }
+    testEnigmaCipher();
 }
 
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
-crptKey.addEventListener('click', testEnigmaCipher);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
 keys.forEach(button => button.addEventListener('click', typeLetter));
