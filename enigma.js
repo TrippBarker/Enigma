@@ -100,6 +100,7 @@ function testEnigmaCipher(){
         }
     }
     cryptMssg.textContent = message;
+    toggleLight(message.charAt(message.length - 1));
 }
 
 function simpleCaesarCipher(e){
@@ -198,27 +199,25 @@ function copyMessage(e){
 
 function clearMessage(e){
     cryptMssg.textContent = "";
-    orgMssg.textContent = "";
-}
-
-function typeLetter(e){
-    orgMssg.textContent = (orgMssg.value + this.textContent);
-    testEnigmaCipher();
+    orgMssg.value = "";
 }
 
 function typedLetter(e){
-    if (e.which >= 65 && e.which <= 90 || e.which === 32){
-        orgMssg.textContent = (orgMssg.value + e.key);
-    } else if (e.which === 8){
-        orgMssg.textContent = (orgMssg.value.slice(0, -1));
-    }
     testEnigmaCipher();
+}
+
+function toggleLight(letterVal){
+    keys.forEach(key => {
+        key.classList.remove("glow");
+        if (key.textContent === letterVal.toUpperCase()){
+            key.classList.toggle("glow");
+        }
+    })
 }
 
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
-keys.forEach(button => button.addEventListener('click', typeLetter));
 window.addEventListener('keyup', typedLetter);
 selectors.forEach(selector => selector.addEventListener('input', testEnigmaCipher));
