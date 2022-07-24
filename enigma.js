@@ -206,6 +206,7 @@ function copyMessage(e){
 function clearMessage(e){
     cryptMssg.textContent = "";
     orgMssg.value = "";
+    toggleLight("");
 }
 
 function typedLetter(e){
