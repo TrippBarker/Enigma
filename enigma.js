@@ -8,16 +8,19 @@ const orgMssg = document.querySelector('#OriginalMessage');
 const cryptMssg = document.querySelector('#CryptedMessage');
 const selectors = document.querySelectorAll('.selector');
 const selectorOne = document.querySelector('#rotorOneSelect');
+const positionOne = document.querySelector('#rotorOnePosition');
 const selectorTwo = document.querySelector('#rotorTwoSelect');
+const positionTwo = document.querySelector('#rotorTwoPosition');
 const selectorThree = document.querySelector('#rotorThreeSelect');
+const positionThree = document.querySelector('#rotorThreePosition');
 const reflectorSelctor = document.querySelector('#reflectorSelect');
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const rotorI =   "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
-const rotorII =  "AJDKSIRUXBLHWTMCQGZNPYFVOE";
-const rotorIII = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
-const rotorIV = "ESOVPZJAYQUIRHXLNFTGKDCMWB";
-const rotorV = "VZBRGITYUPSDNHLXAWMJQOFECK";
+const rotorI =   "JEKMFLGDQVZNTOWYHXUSPAIBRC";
+const rotorII =  "EAJDKSIRUXBLHWTMCQGZNPYFVO";
+const rotorIII = "OBDFHJLCPRTXVZNYEIWGAKMUSQ";
+const rotorIV = "BESOVPZJAYQUIRHXLNFTGKDCMW";
+const rotorV = "KVZBRGITYUPSDNHLXAWMJQOFEC";
 
 const UKWA = "EJMZALYXVBWFCRQUONTSPIKHGD";
 const UKWB = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
@@ -33,7 +36,7 @@ function cryptMessage(e){
     orgMssg.textContent = "";
 }
 
-function getRotor(selectorValue){
+function getRotor(selectorValue, rotorPosition){
     var returnVal = "";
     switch (selectorValue){
         case "I":
@@ -64,15 +67,17 @@ function getRotor(selectorValue){
             returnVal = alphabet;
             break;
     }
+    returnVal += returnVal.substring(0, rotorPosition);
+    returnVal = returnVal.substring(rotorPosition);
     return returnVal;
 }
 
 function testEnigmaCipher(){
     var message = "";
-    var firstRotor = getRotor(selectorOne.value);
-    var secRotor = getRotor(selectorTwo.value);
-    var thirdRotor = getRotor(selectorThree.value);
-    var reflector = getRotor(reflectorSelctor.value);
+    var firstRotor = getRotor(selectorOne.value, parseInt(positionOne.value));
+    var secRotor = getRotor(selectorTwo.value, parseInt(positionTwo.value));
+    var thirdRotor = getRotor(selectorThree.value, parseInt(positionThree.value));
+    var reflector = getRotor(reflectorSelctor.value, 0);
     var letter = "";
     for (var i = 0; i < orgMssg.value.length; i++){
         if (alphabet.includes(orgMssg.value.charAt(i).toUpperCase())){
