@@ -14,6 +14,7 @@ const positionTwo = document.querySelector('#rotorTwoPosition');
 const selectorThree = document.querySelector('#rotorThreeSelect');
 const positionThree = document.querySelector('#rotorThreePosition');
 const reflectorSelctor = document.querySelector('#reflectorSelect');
+const copySettings = document.querySelector('#copySettings');
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const rotorI =   "JEKMFLGDQVZNTOWYHXUSPAIBRC";
@@ -54,13 +55,13 @@ function getRotor(selectorValue, rotorPosition){
         case "V":
             returnVal = rotorV;
             break;
-        case "A":
+        case "UKW-A":
             returnVal = UKWA;
             break;
-        case "B":
+        case "UKW-B":
             returnVal = UKWB;
             break;
-        case "C":
+        case "UKW-C":
             returnVal = UKWC;
             break;
         default:
@@ -220,9 +221,15 @@ function toggleLight(letterVal){
     })
 }
 
+function copyCurrentSettings(e){
+    let currentSettings =`Rotor One: ${selectorOne.value}\nRotor One Position: ${positionOne.value}\nRotor Two: ${selectorTwo.value}\nRotor Two Position: ${positionTwo.value}\nRotor Three: ${selectorThree.value}\nRotor Three Position: ${positionThree.value}\nReflector: ${reflectorSelctor.value}`;
+    navigator.clipboard.writeText(currentSettings);
+}
+
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
+copySettings.addEventListener('click', copyCurrentSettings);
 window.addEventListener('keyup', typedLetter);
 selectors.forEach(selector => selector.addEventListener('input', testEnigmaCipher));

@@ -158,3 +158,10 @@ button:active {
 .dimmed {
     opacity: 50%;
 }
+
+#copySettings {
+    height: 17px;
+    background-color: green;
+    border: 1px solid white;
+    margin-top: 10px;
+}
