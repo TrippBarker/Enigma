@@ -1,3 +1,4 @@
+// HTML elements live here
 const app = document.querySelector('#application');
 const infoBtn = document.querySelector('#info');
 const infoBox = document.querySelector('#infoBox');
@@ -16,6 +17,7 @@ const positionThree = document.querySelector('#rotorThreePosition');
 const reflectorSelctor = document.querySelector('#reflectorSelect');
 const copySettings = document.querySelector('#copySettings');
 
+// Variables used to store rotors/reflectors used to scramble messages
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const rotorI =   "JEKMFLGDQVZNTOWYHXUSPAIBRC";
 const rotorII =  "EAJDKSIRUXBLHWTMCQGZNPYFVO";
@@ -27,16 +29,62 @@ const UKWA = "EJMZALYXVBWFCRQUONTSPIKHGD";
 const UKWB = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
 const UKWC = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
 
+// Function called to make the information box visible
 function displayInfo(e){
     infoBox.classList.toggle("visible");
     app.classList.toggle("dimmed");
 }
 
-function cryptMessage(e){
-    cryptMssg.textContent = orgMssg.value.toUpperCase();
-    orgMssg.textContent = "";
+// Function encrypts message using algorithm that mimics the Enigma Machine
+function enigmaCipher(){
+    var message = "";
+    // Check settings and assign appropriate rotors in correct positions
+    var firstRotor = getRotor(selectorOne.value, parseInt(positionOne.value));
+    var secRotor = getRotor(selectorTwo.value, parseInt(positionTwo.value));
+    var thirdRotor = getRotor(selectorThree.value, parseInt(positionThree.value));
+    var reflector = getRotor(reflectorSelctor.value, 0);
+    var letter = "";
+    // For each letter in the original message, run through the encryption algorithm.
+    for (var i = 0; i < orgMssg.value.length; i++){
+        // If letter is in the alphabet, encrypt it, otherwise pass it along unchanged(spaces, numbers and punctuation are left unchanged)
+        if (alphabet.includes(orgMssg.value.charAt(i).toUpperCase())){
+            // Ensure letter is in uppercase
+            letter = orgMssg.value.charAt(i).toUpperCase();
+            // For each subsiquent rotor, replace the current letter with the letter of the next rotor at the same index.
+            letter = firstRotor.charAt(alphabet.indexOf(letter));
+            letter = secRotor.charAt(alphabet.indexOf(letter));
+            letter = thirdRotor.charAt(alphabet.indexOf(letter));
+            // Once through the rotors, pass through the reflector
+            letter = reflector.charAt(alphabet.indexOf(letter));
+            // Once through reflector, pass letter back through the rotors in reverse order
+            letter = alphabet.charAt(thirdRotor.indexOf(letter));
+            letter = alphabet.charAt(secRotor.indexOf(letter));
+            letter = alphabet.charAt(firstRotor.indexOf(letter));
+            // Append the encrypted letter to the end of the new message
+            message += letter;
+            // Conditional statements that 'rotate' the next rotor if a rotor has reached its 'rotate letter'
+            if (firstRotor.charAt(0) === "X"){
+                if (secRotor.charAt(0) === "U"){
+                    thirdRotor += thirdRotor.charAt(0);
+                    thirdRotor = thirdRotor.substring(1);
+                }
+                secRotor += secRotor.charAt(0);
+                secRotor = secRotor.substring(1);
+            }
+            // First rotor is rotated after each key strike
+            firstRotor += firstRotor.charAt(0);
+            firstRotor = firstRotor.substring(1);
+        } else {
+            message += orgMssg.value.charAt(i);
+        }
+    }
+    // Pass encrypted message into the encrypted message text field
+    cryptMssg.textContent = message;
+    // "light up" the letter on the light board that corrosponds with the last encrypted letter
+    toggleLight(message.charAt(message.length - 1));
 }
 
+// Function is called whenever a message is being ecrypted the retreives the correct rotor for each position
 function getRotor(selectorValue, rotorPosition){
     var returnVal = "";
     switch (selectorValue){
@@ -73,42 +121,7 @@ function getRotor(selectorValue, rotorPosition){
     return returnVal;
 }
 
-function testEnigmaCipher(){
-    var message = "";
-    var firstRotor = getRotor(selectorOne.value, parseInt(positionOne.value));
-    var secRotor = getRotor(selectorTwo.value, parseInt(positionTwo.value));
-    var thirdRotor = getRotor(selectorThree.value, parseInt(positionThree.value));
-    var reflector = getRotor(reflectorSelctor.value, 0);
-    var letter = "";
-    for (var i = 0; i < orgMssg.value.length; i++){
-        if (alphabet.includes(orgMssg.value.charAt(i).toUpperCase())){
-            letter = orgMssg.value.charAt(i).toUpperCase();
-            letter = firstRotor.charAt(alphabet.indexOf(letter));
-            letter = secRotor.charAt(alphabet.indexOf(letter));
-            letter = thirdRotor.charAt(alphabet.indexOf(letter));
-            letter = reflector.charAt(alphabet.indexOf(letter));
-            letter = alphabet.charAt(thirdRotor.indexOf(letter));
-            letter = alphabet.charAt(secRotor.indexOf(letter));
-            letter = alphabet.charAt(firstRotor.indexOf(letter));
-            message += letter;
-            if (firstRotor.charAt(0) === "X"){
-                if (secRotor.charAt(0) === "U"){
-                    thirdRotor += thirdRotor.charAt(0);
-                    thirdRotor = thirdRotor.substring(1);
-                }
-                secRotor += secRotor.charAt(0);
-                secRotor = secRotor.substring(1);
-            }
-            firstRotor += firstRotor.charAt(0);
-            firstRotor = firstRotor.substring(1);
-        } else {
-            message += orgMssg.value.charAt(i);
-        }
-    }
-    cryptMssg.textContent = message;
-    toggleLight(message.charAt(message.length - 1));
-}
-
+/* Caesar Cipher used for bug testing, not currently in use.
 function simpleCaesarCipher(e){
     var message = "";
     for (var i = 0; i < orgMssg.value.length; i++){
@@ -198,21 +211,21 @@ function simpleCaesarCipher(e){
     cryptMssg.textContent = message;
     orgMssg.textContent = "";
 }
+*/
 
+// Function called when copy button is pressed
 function copyMessage(e){
     navigator.clipboard.writeText(cryptMssg.value);
 }
 
+// Clear function called when clear button is pressed
 function clearMessage(e){
     cryptMssg.textContent = "";
     orgMssg.value = "";
     toggleLight("");
 }
 
-function typedLetter(e){
-    testEnigmaCipher();
-}
-
+// Function called by enigmaCipher to apply a lighting effect when a key is pressed
 function toggleLight(letterVal){
     keys.forEach(key => {
         key.classList.remove("glow");
@@ -222,15 +235,17 @@ function toggleLight(letterVal){
     })
 }
 
+// Function called to copy current settings into the user's clipboard
 function copyCurrentSettings(e){
     let currentSettings =`Rotor One: ${selectorOne.value}\nRotor One Position: ${positionOne.value}\nRotor Two: ${selectorTwo.value}\nRotor Two Position: ${positionTwo.value}\nRotor Three: ${selectorThree.value}\nRotor Three Position: ${positionThree.value}\nReflector: ${reflectorSelctor.value}`;
     navigator.clipboard.writeText(currentSettings);
 }
 
+// Event listeners live here
 infoBtn.addEventListener('click', displayInfo);
 infoBox.addEventListener('click', displayInfo);
 copyKey.addEventListener('click', copyMessage);
 clrKey.addEventListener('click', clearMessage);
 copySettings.addEventListener('click', copyCurrentSettings);
-window.addEventListener('keyup', typedLetter);
-selectors.forEach(selector => selector.addEventListener('input', testEnigmaCipher));
+window.addEventListener('keyup', enigmaCipher);
+selectors.forEach(selector => selector.addEventListener('input', enigmaCipher));
