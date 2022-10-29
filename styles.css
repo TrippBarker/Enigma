@@ -4,7 +4,7 @@
     outline: none;
 }
 
-p, ul, li, s {
+p, ul, li, s, a {
     background-color: #f7f3ea;
 }
 
